@@ -39,8 +39,8 @@ public:
         iterator& operator--();
         iterator operator++(int);
         iterator operator--(int);
-        bool operator==(const iterator&);
-        bool operator!=(const iterator&);
+        bool operator==(const iterator&) const;
+        bool operator!=(const iterator&) const;
 
     private:
         Node* node_ptr;
@@ -56,14 +56,14 @@ public:
 
         const_iterator(Node*);
 
-        reference operator*();
-        pointer operator->();
+        reference operator*() const;
+        pointer operator->() const;
         const_iterator& operator++();
         const_iterator& operator--();
         const_iterator operator++(int);
         const_iterator operator--(int);
-        bool operator==(const_iterator&);
-        bool operator!=(const_iterator&);
+        bool operator==(const const_iterator&) const;
+        bool operator!=(const const_iterator&) const;
     private:
         Node* node_ptr;
     };
@@ -76,9 +76,14 @@ public:
     reference back();
     bool empty() const;
     size_type size_() const;
+
+    template <typename InputIt>
+    void push_range(InputIt, InputIt);
+    
+    void swap(Queue&);
     void clear();
-    iterator begin() const;
-    iterator end() const;
+    iterator begin();
+    iterator end();
     const_iterator cbegin() const;
     const_iterator cend() const;
 };
